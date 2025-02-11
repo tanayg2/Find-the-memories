@@ -1,5 +1,4 @@
 import { ArrowBigLeft, ArrowBigRight, ArrowBigUp } from "lucide-react"
-import Image from "next/image"
 
 interface ControlsProps {
   onMove: (direction: "left" | "right" | "idle") => void
@@ -12,17 +11,18 @@ export default function Controls({ onMove, onJump, rosesCollected }: ControlsPro
     <div className="flex flex-col">
       <div className="flex flex-row">
         {[...Array(5)].map((_, i) => (
-          <Image
-            src={`/couplepic${i + 1}.jpeg`}
-            width={60}
-            height={60}
-            alt={`Rose ${i + 1}`}
+          <div
             key={i} 
-            className="z-20 fixed -translate-y-14"
+            className="z-20 fixed translate-y-[-450px]"
             style={{
               transition: "all 0.3s ease", // Smooth transition when collecting
               opacity: i < rosesCollected ? 1 : 0,
-              left: i * 66 + 35,
+              left: i * 66 + 6,
+              backgroundImage: `url('/couplePic${i + 1}.jpeg')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              width: 70,
+              height: 70,
             }}
           />
         ))}
