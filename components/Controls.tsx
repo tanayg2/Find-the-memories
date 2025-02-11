@@ -10,19 +10,19 @@ interface ControlsProps {
 export default function Controls({ onMove, onJump, rosesCollected }: ControlsProps) {
   return (
     <div className="flex flex-col">
-      <div className="flex flex-row mt-5">
+      <div className="flex flex-row">
         {[...Array(5)].map((_, i) => (
           <Image
             src={`/couplepic${i + 1}.jpeg`}
-            width={80}
-            height={80}
+            width={60}
+            height={60}
             alt={`Rose ${i + 1}`}
             key={i} 
-            className="z-20 fixed"
+            className="z-20 fixed -translate-y-14"
             style={{
               transition: "all 0.3s ease", // Smooth transition when collecting
               opacity: i < rosesCollected ? 1 : 0,
-              left: i * 86 + 6,
+              left: i * 66 + 35,
             }}
           />
         ))}

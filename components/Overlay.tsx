@@ -28,14 +28,14 @@ export default function Overlay({ open }: OverlayProps) {
         {[...Array(5)].map((_, i) => (
           <Image
             src={`/couplepic${i + 1}.jpeg`}
-            width={80}  
-            height={80}
+            width={70}  
+            height={70}
             alt={`Rose ${i + 1}`}
             key={i} 
             className="z-20 fixed"
             style={{
               transition: "all 0.3s ease", // Smooth transition when collecting
-              left: i * 86 + 3,
+              left: i * 76 + 6,
             }}
           />
         ))}

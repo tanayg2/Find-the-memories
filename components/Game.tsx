@@ -7,11 +7,11 @@ import Rose from "./Rose"
 import Controls from "./Controls"
 import Overlay from "./Overlay"
 
-const GAME_HEIGHT = 700
+const GAME_HEIGHT = 500
 const GRAVITY = 0.5
-const JUMP_FORCE = 14
+const JUMP_FORCE = 12
 const MOVE_SPEED = 5
-const GROUND_HEIGHT = 28
+const GROUND_HEIGHT = 20
 const CAMERA_BUFFER_PERCENT = 0.2 // 20% of screen width
 export const PLAYER_HEIGHT = 80
 export const PLAYER_WIDTH = 60
@@ -28,35 +28,35 @@ interface GameState {
 
 const platforms = [
   { x: 0, y: GAME_HEIGHT - GROUND_HEIGHT, width: 5000, height: GROUND_HEIGHT },
-  { x: 130, y: 560, width: 200, height: 28 },
-  { x: 350, y: 420, width: 200, height: 28 },
-  { x: 600, y: 280, width: 200, height: 28 },
-  { x: 850, y: 490, width: 150, height: 28 },
-  { x: 1100, y: 350, width: 200, height: 28 },
-  { x: 1400, y: 420, width: 250, height: 28 },
-  { x: 1700, y: 280, width: 300, height: 28 },
-  { x: 2100, y: 420, width: 200, height: 28 },
-  { x: 2400, y: 350, width: 250, height: 28 },
-  { x: 2700, y: 490, width: 200, height: 28 },
-  { x: 3000, y: 280, width: 300, height: 28 },
-  { x: 3400, y: 420, width: 250, height: 28 },
-  { x: 3800, y: 350, width: 200, height: 28 },
-  { x: 4100, y: 490, width: 400, height: 28 },
-  { x: 4600, y: 350, width: 250, height: 28 },
+  { x: 130, y: 400, width: 200, height: 20 },
+  { x: 350, y: 300, width: 200, height: 20 },
+  { x: 600, y: 200, width: 200, height: 20 },
+  { x: 850, y: 350, width: 150, height: 20 },
+  { x: 1100, y: 250, width: 200, height: 20 },
+  { x: 1400, y: 300, width: 250, height: 20 },
+  { x: 1700, y: 200, width: 300, height: 20 },
+  { x: 2100, y: 300, width: 200, height: 20 },
+  { x: 2400, y: 250, width: 250, height: 20 },
+  { x: 2700, y: 350, width: 200, height: 20 },
+  { x: 3000, y: 200, width: 300, height: 20 },
+  { x: 3400, y: 300, width: 250, height: 20 },
+  { x: 3800, y: 250, width: 200, height: 20 },
+  { x: 4100, y: 350, width: 400, height: 20 },
+  { x: 4600, y: 250, width: 250, height: 20 },
 ]
 
 const roses = [
-  { x: 250, y: 490, collected: false },
-  { x: 1000, y: 420, collected: false },
-  { x: 2000, y: 210, collected: false },
-  { x: 3500, y: 350, collected: false },
-  { x: 4800, y: 280, collected: false },
+  { x: 250, y: 350, collected: false },
+  { x: 1000, y: 300, collected: false },
+  { x: 2000, y: 150, collected: false },
+  { x: 3500, y: 250, collected: false },
+  { x: 4800, y: 200, collected: false },
 ]
 
 export default function Game() {
   const [gameState, setGameState] = useState<GameState>({
     playerX: 50,
-    playerY: 490,
+    playerY: 350,
     playerVelocityY: 0,
     isJumping: false,
     direction: "idle",
