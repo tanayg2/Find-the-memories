@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react"
+
 interface PlayerProps {
   x: number
   y: number
+  direction: "left" | "right" | "idle"
 }
 
-export default function Player({ x, y }: PlayerProps) {
+export default function Player({ x, y, direction }: PlayerProps) {
+  const [previousDirection, setPreviousDirection] = useState<"left" | "right">(
+    "right"
+  )
+  useEffect(() => {
+    if (direction !== "idle") {
+      setPreviousDirection(direction)
+    }
+  }, [direction]) 
+
+
   return (
     <div
       className="player"
@@ -12,17 +25,13 @@ export default function Player({ x, y }: PlayerProps) {
         top: y,
         width: 40,
         height: 60,
-        backgroundColor: "#ff69b4",
         position: "absolute",
-        borderRadius: "50% 50% 0 0",
+        backgroundImage: "url('/emily.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        transform: previousDirection === "left" ? "scaleX(1)" : "scaleX(-1)"  
       }}
-    >
-      <div className="player-face" style={{ position: "relative", top: 10 }}>
-        <div className="player-eye" style={{ left: 8 }} />
-        <div className="player-eye" style={{ right: 8 }} />
-        <div className="player-mouth" />
-      </div>
-    </div>
+    />
   )
 }
 

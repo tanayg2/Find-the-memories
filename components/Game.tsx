@@ -20,19 +20,18 @@ interface GameState {
   playerVelocityY: number
   isJumping: boolean
   direction: "left" | "right" | "idle"
-  rosesCollected: number
   gameCompleted: boolean
   cameraX: number
 }
 
 const platforms = [
   { x: 0, y: GAME_HEIGHT - GROUND_HEIGHT, width: 5000, height: GROUND_HEIGHT },
-  { x: 0, y: 400, width: 300, height: 20 },
+  { x: 130, y: 400, width: 200, height: 20 },
   { x: 350, y: 300, width: 200, height: 20 },
   { x: 600, y: 200, width: 200, height: 20 },
   { x: 850, y: 350, width: 150, height: 20 },
   { x: 1100, y: 250, width: 200, height: 20 },
-  { x: 1400, y: 350, width: 250, height: 20 },
+  { x: 1400, y: 300, width: 250, height: 20 },
   { x: 1700, y: 200, width: 300, height: 20 },
   { x: 2100, y: 300, width: 200, height: 20 },
   { x: 2400, y: 250, width: 250, height: 20 },
@@ -40,7 +39,7 @@ const platforms = [
   { x: 3000, y: 200, width: 300, height: 20 },
   { x: 3400, y: 300, width: 250, height: 20 },
   { x: 3800, y: 250, width: 200, height: 20 },
-  { x: 4200, y: 350, width: 300, height: 20 },
+  { x: 4100, y: 350, width: 400, height: 20 },
   { x: 4600, y: 250, width: 250, height: 20 },
 ]
 
@@ -59,10 +58,12 @@ export default function Game() {
     playerVelocityY: 0,
     isJumping: false,
     direction: "idle",
-    rosesCollected: 0,
     gameCompleted: false,
     cameraX: 0,
   })
+
+  const [rosesCollected, setRosesCollected] = useState(0)
+  const [overlayOpen, setOverlayOpen] = useState(false)
 
   const [screenWidth, setScreenWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1000)
 
@@ -143,10 +144,13 @@ export default function Game() {
           newState.playerY + 60 > rose.y
         ) {
           roses[index].collected = true
-          newState.rosesCollected++
-          if (newState.rosesCollected === 5) {
-            newState.gameCompleted = true
-          }
+          setRosesCollected(prev => {
+            const newCount = prev + 1
+            if (newCount >= 5) {
+              setOverlayOpen(true)
+            }
+            return newCount
+          })
         }
       })
 
@@ -169,7 +173,6 @@ export default function Game() {
         newState.cameraX = newState.playerX - cameraBuffer
       }
       newState.cameraX = Math.max(0, Math.min(newState.cameraX, 5000 - screenWidth))
-
       return newState
     })
 
@@ -187,21 +190,6 @@ export default function Game() {
       }
       return prevState
     })
-  }
-
-  const restart = () => {
-    setGameState({
-      playerX: 50,
-      playerY: 350,
-      playerVelocityY: 0,
-      isJumping: false,
-      direction: "idle",
-      rosesCollected: 0,
-      gameCompleted: false,
-      cameraX: 0,
-    })
-
-    roses.forEach((rose) => (rose.collected = false))
   }
 
   return (
@@ -226,17 +214,17 @@ export default function Game() {
             transform: `translateX(${gameState.cameraX * 0.5}px)`,
           }}
         />
-        <Player x={gameState.playerX} y={gameState.playerY} />
+        <Player x={gameState.playerX} y={gameState.playerY} direction={gameState.direction} />
         {platforms.map((platform, index) => (
           <Platform key={index} {...platform} />
         ))}
         {roses.map((rose, index) => (
-          <Rose key={index} {...rose} />
+          <Rose key={index} {...rose} index={index} />
         ))}
       </div>
-      <div className="rose-counter">Roses: {gameState.rosesCollected}/5</div>
-      <Controls onMove={handleMove} onJump={handleJump} />
-      {gameState.gameCompleted && <Overlay onRestart={restart} />}
+      <div className="rose-counter">Roses: {rosesCollected}/5</div>
+      <Controls onMove={handleMove} onJump={handleJump} rosesCollected={rosesCollected} />
+      <Overlay open={overlayOpen}  />
     </div>
   )
 }

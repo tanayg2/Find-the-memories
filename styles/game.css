@@ -82,8 +82,8 @@
 }
 
 .control-btn {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   font-size: 24px;
   background-color: rgba(255, 255, 255, 0.5);
   border: none;
@@ -119,6 +119,7 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  height: min-content;
 }
 
 .overlay-buttons button {
@@ -174,5 +175,23 @@
 .overlay-buttons button,
 .restart-btn {
   touch-action: manipulation;
+}
+
+.roses-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.rose-icon {
+  transition: opacity 0.3s ease;
 }
 
