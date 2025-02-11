@@ -73,7 +73,7 @@
 
 .controls {
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -112,7 +112,6 @@
   font-size: 36px;
   color: #ff1493;
   font-family: "Brush Script MT", cursive;
-  margin-bottom: 20px;
 }
 
 .overlay-buttons {

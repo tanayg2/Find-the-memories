@@ -1,3 +1,6 @@
+import { ArrowBigLeft, ArrowBigRight, ArrowBigUp } from "lucide-react"
+import Image from "next/image"
+
 interface ControlsProps {
   onMove: (direction: "left" | "right" | "idle") => void
   onJump: () => void
@@ -6,34 +9,36 @@ interface ControlsProps {
 
 export default function Controls({ onMove, onJump, rosesCollected }: ControlsProps) {
   return (
-    <div className="controls">
-      <div className="roses-display">
+    <div className="flex flex-col">
+      <div className="flex flex-row mt-5">
         {[...Array(5)].map((_, i) => (
-          <div 
+          <Image
+            src={`/couplepic${i + 1}.jpeg`}
+            width={80}
+            height={80}
+            alt={`Rose ${i + 1}`}
             key={i} 
-            className="rose-icon"
+            className="z-20 fixed"
             style={{
-              width: '30px',
-              height: '30px',
-              backgroundImage: "url('/emily.png')",
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-              opacity: i < rosesCollected ? 1 : 0.3,
-              margin: '0 5px'
+              transition: "all 0.3s ease", // Smooth transition when collecting
+              opacity: i < rosesCollected ? 1 : 0,
+              left: i * 86 + 6,
             }}
           />
         ))}
       </div>
-      <button className="control-btn left" onTouchStart={() => onMove("left")} onTouchEnd={() => onMove("idle")}>
-        ←
+    <div className="controls">
+      <button className="bg-pink-50 rounded-2xl" onTouchStart={() => onMove("left")} onTouchEnd={() => onMove("idle")}>
+        <ArrowBigLeft width={80} height={80} />
       </button>
-      <button className="control-btn right" onTouchStart={() => onMove("right")} onTouchEnd={() => onMove("idle")}>
-        →
+      <button className="bg-pink-50 rounded-2xl" onTouchStart={() => onMove("right")} onTouchEnd={() => onMove("idle")}>
+        <ArrowBigRight width={80} height={80} />
       </button>
-      <button className="control-btn jump" onTouchStart={onJump}>
-        Jump
+      <button className="bg-pink-50 rounded-2xl" onTouchStart={onJump}>
+        <ArrowBigUp width={80} height={80} />
       </button>
     </div>
+</div>
   )
 }
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { PLAYER_HEIGHT, PLAYER_WIDTH } from "./Game"
 
 interface PlayerProps {
   x: number
@@ -23,8 +24,8 @@ export default function Player({ x, y, direction }: PlayerProps) {
       style={{
         left: x,
         top: y,
-        width: 40,
-        height: 60,
+        width: PLAYER_WIDTH,
+        height: PLAYER_HEIGHT,
         position: "absolute",
         backgroundImage: "url('/emily.png')",
         backgroundSize: "cover",

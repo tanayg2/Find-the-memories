@@ -7,12 +7,14 @@ import Rose from "./Rose"
 import Controls from "./Controls"
 import Overlay from "./Overlay"
 
-const GAME_HEIGHT = 500
+const GAME_HEIGHT = 700
 const GRAVITY = 0.5
-const JUMP_FORCE = 12
+const JUMP_FORCE = 14
 const MOVE_SPEED = 5
-const GROUND_HEIGHT = 20
+const GROUND_HEIGHT = 28
 const CAMERA_BUFFER_PERCENT = 0.2 // 20% of screen width
+export const PLAYER_HEIGHT = 80
+export const PLAYER_WIDTH = 60
 
 interface GameState {
   playerX: number
@@ -26,35 +28,35 @@ interface GameState {
 
 const platforms = [
   { x: 0, y: GAME_HEIGHT - GROUND_HEIGHT, width: 5000, height: GROUND_HEIGHT },
-  { x: 130, y: 400, width: 200, height: 20 },
-  { x: 350, y: 300, width: 200, height: 20 },
-  { x: 600, y: 200, width: 200, height: 20 },
-  { x: 850, y: 350, width: 150, height: 20 },
-  { x: 1100, y: 250, width: 200, height: 20 },
-  { x: 1400, y: 300, width: 250, height: 20 },
-  { x: 1700, y: 200, width: 300, height: 20 },
-  { x: 2100, y: 300, width: 200, height: 20 },
-  { x: 2400, y: 250, width: 250, height: 20 },
-  { x: 2700, y: 350, width: 200, height: 20 },
-  { x: 3000, y: 200, width: 300, height: 20 },
-  { x: 3400, y: 300, width: 250, height: 20 },
-  { x: 3800, y: 250, width: 200, height: 20 },
-  { x: 4100, y: 350, width: 400, height: 20 },
-  { x: 4600, y: 250, width: 250, height: 20 },
+  { x: 130, y: 560, width: 200, height: 28 },
+  { x: 350, y: 420, width: 200, height: 28 },
+  { x: 600, y: 280, width: 200, height: 28 },
+  { x: 850, y: 490, width: 150, height: 28 },
+  { x: 1100, y: 350, width: 200, height: 28 },
+  { x: 1400, y: 420, width: 250, height: 28 },
+  { x: 1700, y: 280, width: 300, height: 28 },
+  { x: 2100, y: 420, width: 200, height: 28 },
+  { x: 2400, y: 350, width: 250, height: 28 },
+  { x: 2700, y: 490, width: 200, height: 28 },
+  { x: 3000, y: 280, width: 300, height: 28 },
+  { x: 3400, y: 420, width: 250, height: 28 },
+  { x: 3800, y: 350, width: 200, height: 28 },
+  { x: 4100, y: 490, width: 400, height: 28 },
+  { x: 4600, y: 350, width: 250, height: 28 },
 ]
 
 const roses = [
-  { x: 250, y: 350, collected: false },
-  { x: 1000, y: 300, collected: false },
-  { x: 2000, y: 150, collected: false },
-  { x: 3500, y: 250, collected: false },
-  { x: 4800, y: 200, collected: false },
+  { x: 250, y: 490, collected: false },
+  { x: 1000, y: 420, collected: false },
+  { x: 2000, y: 210, collected: false },
+  { x: 3500, y: 350, collected: false },
+  { x: 4800, y: 280, collected: false },
 ]
 
 export default function Game() {
   const [gameState, setGameState] = useState<GameState>({
     playerX: 50,
-    playerY: 350,
+    playerY: 490,
     playerVelocityY: 0,
     isJumping: false,
     direction: "idle",
@@ -102,13 +104,13 @@ export default function Game() {
       for (const platform of platforms) {
         if (
           newState.playerX < platform.x + platform.width &&
-          newState.playerX + 40 > platform.x &&
+          newState.playerX + PLAYER_WIDTH > platform.x &&
           newState.playerY < platform.y + platform.height &&
-          newState.playerY + 60 > platform.y
+          newState.playerY + PLAYER_HEIGHT > platform.y
         ) {
           // Check if colliding from above
-          if (prevState.playerY + 60 <= platform.y) {
-            newState.playerY = platform.y - 60
+          if (prevState.playerY + PLAYER_HEIGHT <= platform.y) {
+            newState.playerY = platform.y -PLAYER_HEIGHT 
             newState.playerVelocityY = 0
             newState.isJumping = false
             onPlatform = true
@@ -123,7 +125,7 @@ export default function Game() {
             if (newState.direction === "left") {
               newState.playerX = platform.x + platform.width
             } else if (newState.direction === "right") {
-              newState.playerX = platform.x - 40
+              newState.playerX = platform.x -PLAYER_WIDTH 
             }
           }
           break
@@ -139,9 +141,9 @@ export default function Game() {
         if (
           !rose.collected &&
           newState.playerX < rose.x + 30 &&
-          newState.playerX + 40 > rose.x &&
+          newState.playerX + PLAYER_WIDTH > rose.x &&
           newState.playerY < rose.y + 30 &&
-          newState.playerY + 60 > rose.y
+          newState.playerY + PLAYER_HEIGHT > rose.y
         ) {
           roses[index].collected = true
           setRosesCollected(prev => {
@@ -155,12 +157,12 @@ export default function Game() {
       })
 
       // Keep player within bounds
-      newState.playerX = Math.max(0, Math.min(newState.playerX, 5000 - 40))
-      newState.playerY = Math.min(newState.playerY, GAME_HEIGHT - 60)
+      newState.playerX = Math.max(0, Math.min(newState.playerX, 5000 - PLAYER_WIDTH))
+      newState.playerY = Math.min(newState.playerY, GAME_HEIGHT - PLAYER_HEIGHT)
 
       // Prevent falling below the ground
-      if (newState.playerY > GAME_HEIGHT - GROUND_HEIGHT - 60) {
-        newState.playerY = GAME_HEIGHT - GROUND_HEIGHT - 60
+      if (newState.playerY > GAME_HEIGHT - GROUND_HEIGHT - PLAYER_HEIGHT) {
+        newState.playerY = GAME_HEIGHT - GROUND_HEIGHT -PLAYER_HEIGHT 
         newState.playerVelocityY = 0
         newState.isJumping = false
       }
@@ -206,7 +208,6 @@ export default function Game() {
         <div
           className="background"
           style={{
-            backgroundImage: "url(/placeholder.svg?height=500&width=5000)",
             backgroundRepeat: "repeat-x",
             width: "5000px",
             height: "100%",
@@ -222,7 +223,7 @@ export default function Game() {
           <Rose key={index} {...rose} index={index} />
         ))}
       </div>
-      <div className="rose-counter">Roses: {rosesCollected}/5</div>
+      <div className="rose-counter">Memories: {rosesCollected}/5</div>
       <Controls onMove={handleMove} onJump={handleJump} rosesCollected={rosesCollected} />
       <Overlay open={overlayOpen}  />
     </div>

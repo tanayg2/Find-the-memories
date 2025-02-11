@@ -5,7 +5,7 @@ import "../styles/game.css"
 
 export default function Home() {
   return (
-    <div className="app">
+    <div>
       <Game />
     </div>
   )
