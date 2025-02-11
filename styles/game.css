@@ -1,0 +1,178 @@
+.game-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #ffe6f2;
+  touch-action: none;
+}
+
+.game-world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.1s ease-out;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  transition: transform 0.1s ease-out;
+}
+
+.rose-counter {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  color: #ff1493;
+  z-index: 10;
+}
+
+.player-eye {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.player-mouth {
+  position: absolute;
+  width: 12px;
+  height: 6px;
+  background-color: #000;
+  border-radius: 0 0 100% 100%;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.rose-stem {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background-color: #4caf50;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.rose-petal {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ff1493;
+  border-radius: 50%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+.control-btn {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 50%;
+  touch-action: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 192, 203, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.overlay-content {
+  text-align: center;
+}
+
+.overlay-content h2 {
+  font-size: 36px;
+  color: #ff1493;
+  font-family: "Brush Script MT", cursive;
+  margin-bottom: 20px;
+}
+
+.overlay-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.overlay-buttons button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.restart-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.restart-btn:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+  .control-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .overlay-content h2 {
+    font-size: 28px;
+  }
+
+  .overlay-buttons button,
+  .restart-btn {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.overlay-buttons button,
+.restart-btn {
+  touch-action: manipulation;
+}
+
