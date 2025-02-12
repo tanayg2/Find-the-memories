@@ -15,6 +15,14 @@ const GROUND_HEIGHT = 20
 const CAMERA_BUFFER_PERCENT = 0.2 // 20% of screen width
 export const PLAYER_HEIGHT = 80
 export const PLAYER_WIDTH = 60
+export const PLAYER_URL = "https://firebasestorage.googleapis.com/v0/b/waldo-a2cc8.appspot.com/o/vday-game%2Femily.png?alt=media&token=90a65c33-edcc-4a84-9966-dd15acc25ddb"
+export const ROSE_URLS = [
+  "https://firebasestorage.googleapis.com/v0/b/waldo-a2cc8.appspot.com/o/vday-game%2Fcouplepic1.jpeg?alt=media&token=250cb2d4-5c52-40d8-9333-78c306acdb3a",
+  "https://firebasestorage.googleapis.com/v0/b/waldo-a2cc8.appspot.com/o/vday-game%2Fcouplepic2.jpeg?alt=media&token=ed8bb0e5-70eb-4eef-8d1d-d581bdec20ed",
+  "https://firebasestorage.googleapis.com/v0/b/waldo-a2cc8.appspot.com/o/vday-game%2Fcouplepic3.jpeg?alt=media&token=6f889430-0592-4f39-8007-b8277d081429",
+  "https://firebasestorage.googleapis.com/v0/b/waldo-a2cc8.appspot.com/o/vday-game%2Fcouplepic4.jpeg?alt=media&token=0237d35d-fbfe-42b2-aaa7-02a7df3ebca8",
+  "https://firebasestorage.googleapis.com/v0/b/waldo-a2cc8.appspot.com/o/vday-game%2Fcouplepic5.jpeg?alt=media&token=f290ba72-752c-460b-b93e-19cc50fea765"
+]
 
 interface GameState {
   playerX: number

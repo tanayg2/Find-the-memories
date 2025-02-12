@@ -1,4 +1,6 @@
 import { ArrowBigLeft, ArrowBigRight, ArrowBigUp } from "lucide-react"
+import Image from "next/image"
+import { ROSE_URLS } from "./Game"
 
 interface ControlsProps {
   onMove: (direction: "left" | "right" | "idle") => void
@@ -11,16 +13,20 @@ export default function Controls({ onMove, onJump, rosesCollected }: ControlsPro
     <div className="flex flex-col">
       <div className="flex flex-row">
         {[...Array(5)].map((_, i) => (
-          <div
+          <Image
+            alt={`Rose ${i + 1}`}
+            src={ROSE_URLS[i]}
+            width={70}
+            height={70}
             key={i} 
             className="z-20 fixed translate-y-[-450px]"
             style={{
               transition: "all 0.3s ease", // Smooth transition when collecting
               opacity: i < rosesCollected ? 1 : 0,
-              left: i * 66 + 6,
-              backgroundImage: `url('/couplePic${i + 1}.jpeg')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              left: i * 76 + 6,
+              // backgroundImage: `url('/img/couplePic${i + 1}.jpeg')`,
+              // backgroundSize: "cover",
+              // backgroundPosition: "center",
               width: 70,
               height: 70,
             }}

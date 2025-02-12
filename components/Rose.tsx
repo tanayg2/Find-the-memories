@@ -1,3 +1,6 @@
+import Image from "next/image"
+import { ROSE_URLS } from "./Game"
+
 interface RoseProps {
   x: number
   y: number
@@ -12,15 +15,18 @@ export default function Rose({ x, y, collected, index }: RoseProps) {
     width: collected ? 70 : 40,
     height: collected ? 70 : 40,
     position: "absolute" as const,
-    backgroundImage: `url('/couplePic${index + 1}.jpeg')`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    // backgroundImage: `url('/couplePic${index + 1}.jpeg')`,
+    // backgroundSize: "cover",
+    // backgroundPosition: "center",
     transition: "all 0.3s ease", // Smooth transition when collecting
   }
 
   return (
-    <div
-      className="rose"
+    <Image
+      src={ROSE_URLS[index]}
+      alt={`Rose ${index + 1}`}
+      width={40}
+      height={40}
       style={style}
     />
   )
